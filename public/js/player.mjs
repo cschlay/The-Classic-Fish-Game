@@ -28,6 +28,11 @@ class Player {
         ctx.stroke()
     }
 
+    growFish() {
+        this.width += 10
+        this.height += 5
+    }
+
     moveLeft() {
         if (this.x > 0) {
             this.x -= this.speed

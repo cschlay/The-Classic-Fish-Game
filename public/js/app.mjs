@@ -7,6 +7,7 @@ const canvas = document.getElementById("app")
 const ctx = canvas.getContext("2d")
 
 let interval = undefined
+let moveFishInterval = undefined
 
 const player = new Player(canvas)
 const handleKeyInput = (event) => {
@@ -40,6 +41,7 @@ const updateScore = (points) => {
 /** A player has lost. */
 const showFinal = () => {
     clearInterval(interval)
+    clearInterval(moveFishInterval)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.font = '30px Arial'
     ctx.fillText(`Your fish got eaten. Refresh page to play again.`, 10, 50)
@@ -55,4 +57,5 @@ const render = async () => {
 
 
 interval = setInterval(render, 10)
+moveFishInterval = setInterval(() => fishManager.moveFishes(), 250)
 updateScore(0)

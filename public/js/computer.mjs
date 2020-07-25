@@ -2,6 +2,7 @@ import { Fish } from "./fish.mjs"
 
 class ComputerFishManager {
     constructor(canvas) {
+        this.canvas = canvas
         this.fishes = {}
         this.fishesGenereted = 0
 
@@ -14,6 +15,32 @@ class ComputerFishManager {
     async render() {
         Object.keys(this.fishes).forEach(fishIndex => this.fishes[fishIndex].render())
     }
+
+
+    /** Random movements, only four direction at the moment. */
+    moveFishes() {
+        Object.keys(this.fishes).forEach(fishIndex => {
+            const direction = Math.floor(Math.random() * 4 + 1)
+            const fish = this.fishes[fishIndex]
+            switch (direction) {
+                case 1:
+                    fish.moveLeft()
+                    break
+                case 2:
+                    fish.moveRight()
+                    break
+                case 3:
+                    fish.moveUp()
+                    break
+                case 4:
+                    fish.moveDown()
+                    break
+                default:
+                    break
+            }
+        })
+    }
+
 
     checkCollisions(player, onPlayerEaten, onFishEaten) {
         Object.keys(this.fishes).forEach(fishIndex => {
@@ -29,7 +56,12 @@ class ComputerFishManager {
                 player.x - 10 <= fish.x && player.x + player.width + 10 >= fish.x + fish.width &&
                 player.y - 10 <= fish.y && player.y + player.height + 10 >= fish.y + fish.height) {
                 delete this.fishes[fishIndex]
+                player.growFish()
                 onFishEaten(1) // Add points here.
+
+                // Just spawn a new one
+                this.fishes[this.fishesGenereted] = new Fish(this.canvas)
+                this.fishesGenereted += 1
             }
         })
     }

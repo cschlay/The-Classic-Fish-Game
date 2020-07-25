@@ -4,7 +4,7 @@ class Fish {
 
         this.x = Math.floor(Math.random() * canvas.width)
         this.y = Math.floor(Math.random() * canvas.height)
-        this.width = Math.floor(Math.random() * 80 + 20)
+        this.width = Math.floor(Math.random() * 130 + 20)
         this.height = Math.floor(0.4 * this.width)
 
         // Speed is proptional to its width.
@@ -31,7 +31,7 @@ class Fish {
     }
 
     moveRight() {
-        if (this.x + this.fishWidth < this.canvas.width) {
+        if (this.x + this.width < this.canvas.width) {
             this.x += this.speed
         }
     }
@@ -44,7 +44,7 @@ class Fish {
     }
 
     moveDown() {
-        if (this.y + this.fishHeight < this.canvas.height) {
+        if (this.y + this.height < this.canvas.height) {
             this.y += this.speed
         }
     }
