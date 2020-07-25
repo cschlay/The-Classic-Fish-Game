@@ -1,9 +1,12 @@
+import { ComputerFishManager } from "./computer.mjs"
 import { Player } from "./player.mjs"
 
-const score = 0
+let score = 0
 
 const canvas = document.getElementById("app")
 const ctx = canvas.getContext("2d")
+
+let interval = undefined
 
 const player = new Player(canvas)
 const handleKeyInput = (event) => {
@@ -26,24 +29,30 @@ const handleKeyInput = (event) => {
 }
 window.addEventListener("keypress", handleKeyInput)
 
+const fishManager = new ComputerFishManager(canvas)
 
-const updateScore = async () => {
+const updateScore = (points) => {
+    score += points
     const scoreBoard = document.getElementById('score')
     scoreBoard.textContent = score
 }
 
-const render = () => {
-    // Update Score
-    updateScore()
+/** A player has lost. */
+const showFinal = () => {
+    clearInterval(interval)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.font = '30px Arial'
+    ctx.fillText(`Your fish got eaten. Refresh page to play again.`, 10, 50)
+}
 
-
-    // Clear Canvas
+const render = async () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    // Render Everything Asynchronously
     player.render()
-
+    fishManager.render()
+    fishManager.checkCollisions(player, showFinal, updateScore)
 }
 
 
-setInterval(render, 10)
+interval = setInterval(render, 10)
+updateScore(0)

@@ -1,30 +1,26 @@
-/** TODO: Inherit Fish class. */
-class Player {
+class Fish {
     constructor(canvas) {
-        this.x = 10
-        this.y = 10
-        this.width = 60
-        this.height = 25
-        this.speed = 5
-
-        // Fish Proportions
-
         this.canvas = canvas
+
+        this.x = Math.floor(Math.random() * canvas.width)
+        this.y = Math.floor(Math.random() * canvas.height)
+        this.width = Math.floor(Math.random() * 80 + 20)
+        this.height = Math.floor(0.4 * this.width)
+
+        // Speed is proptional to its width.
+        this.speed = this.width % 50
     }
 
-    /** Draw the fish. */
     async render() {
         const ctx = this.canvas.getContext("2d")
-
         ctx.beginPath()
-
         ctx.moveTo(this.x, this.y)
         ctx.lineTo(this.x + this.width, this.y)
         ctx.lineTo(this.x + this.width, this.y + this.height)
         ctx.lineTo(this.x, this.y + this.height)
         ctx.lineTo(this.x, this.y)
 
-        ctx.strokeStyle = "#ad1da1"
+        ctx.strokeStyle = "#000000"
         ctx.stroke()
     }
 
@@ -35,7 +31,7 @@ class Player {
     }
 
     moveRight() {
-        if (this.x + this.width < this.canvas.width) {
+        if (this.x + this.fishWidth < this.canvas.width) {
             this.x += this.speed
         }
     }
@@ -48,10 +44,10 @@ class Player {
     }
 
     moveDown() {
-        if (this.y + this.height < this.canvas.height) {
+        if (this.y + this.fishHeight < this.canvas.height) {
             this.y += this.speed
         }
     }
 }
 
-export { Player }
+export { Fish }
