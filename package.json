@@ -1,0 +1,23 @@
+{
+    "name": "the-classic-fish-game",
+    "version": "1.0.0",
+    "description": "The classic online game where bigger fish eats a smaller fish with HTML Canvas.",
+    "dependencies": {},
+    "devDependencies": {
+        "http-server": "^0.12.3"
+    },
+    "scripts": {
+        "start": "http-server -a 127.0.0.1 -p 8000",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cschlay/The-Classic-Fish-Game.git"
+    },
+    "author": "Chi-Hao Lay",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/cschlay/The-Classic-Fish-Game/issues"
+    },
+    "homepage": "https://github.com/cschlay/The-Classic-Fish-Game#readme"
+}
